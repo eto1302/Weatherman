@@ -17,7 +17,7 @@ export class BannerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getWeather();
+    //this.getWeather();
   }
 
   getWeather(): void {
