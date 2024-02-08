@@ -1,39 +1,47 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LocationService} from "../../services/location.service";
 import {WeatherService} from "../../services/weather.service";
+import {BannerComponent} from "../banner/banner.component";
+import {Location} from "../../models/location.model";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [
+    BannerComponent,
+    CommonModule
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
 
-  constructor(private locationService: LocationService, private weatherService: WeatherService) {
-    this.getWeather();
+  locations: Location[] = [];
+
+  constructor(private locationService: LocationService,
+              private weatherService: WeatherService) {
+    this.locations = this.locationService.getLocations();
+    console.log(this.locations)
   }
 
-  getWeather(): void {
-    let position = { latitude: 0, longitude: 0 };
-
-    this.locationService.getPosition().then(
-      (pos) => {
-        position = pos;
-
-        this.weatherService.getWeather(position.latitude, position.longitude, "metric").subscribe(
-          (weatherData) => {
-            console.log(weatherData);
-          },
-          (error) => {
-            console.error("Error getting weather: ", error);
-          }
-        );
-      }
-    ).catch((error) => {
-      console.error("Error getting location: ", error);
-    });
+  addLocation() {
+    const sof: Location = {
+      cityName: 'Sofia',
+      countryCode: 'bg',
+      latitude: 42.720037643584085,
+      longitude: 23.285486408484694,
+    };
+    this.locationService.saveLocation(sof);
+    this.reload()
   }
 
+  removeLocations() {
+    this.locationService.clearAllLocations();
+    this.reload()
+  }
+
+  private reload(): void {
+    window.location.reload();
+  }
 }

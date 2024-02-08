@@ -1,0 +1,110 @@
+.banner {
+  height: 30vh;
+  width:70vw;
+  min-width: fit-content;
+  max-width: 1000px;
+  background-color: #253045;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+}
+
+.left {
+  cursor: pointer;
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  float: left;
+  background: url("/assets/weather-images/sunny.jpg");
+  background-position: center;
+  background-size: cover;
+  transform: scale(1.03) perspective(200px);
+  transition: all 0.3s ease-in;
+  border-radius: 30px;
+}
+
+.left:hover {
+  transform: scale(1.15) perspective(2500px);
+}
+
+.today {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 3%;
+}
+
+.weather {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  bottom: 20px;
+  left: 20px;
+}
+
+.weather .bx {
+  font-size: 4.5rem;
+}
+
+.weather .temp {
+  font-weight: 700;
+  font-size: 3.5rem;
+}
+
+
+.right {
+  float: right;
+  position: relative;
+  height: 100%;
+  width:60%;
+  padding-top: 7%;
+}
+
+.right .info {
+  padding: 10% 20%;
+  display: flex;
+  flex-direction: column;
+}
+
+.right .info div {
+  margin-bottom: 10px;
+}
+
+.right .info .title {
+  font-weight: 500;
+  float:left;
+}
+
+.right .info .value {
+  float: right;
+}
+
+.days{
+  display: flex;
+  list-style: none;
+  border-radius: 10px;
+  justify-content: center;
+}
+
+.days li{
+  padding: 15px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+}
+
+.days li .bx {
+  margin-bottom: 5px;
+  font-size: 2rem;
+}
+
+.days li:hover{
+  transform: scale(1.1);
+  background: #c5c5c5;
+}

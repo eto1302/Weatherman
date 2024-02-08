@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {environment} from "../environment";
+import {environment} from "../../environment";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {Weather} from "../models/weather.model";
 
 @Injectable({
   providedIn: 'root'
@@ -9,20 +10,29 @@ import {Observable} from "rxjs";
 export class WeatherService {
 
   private apiKey: string = environment.apiKey;
-  private apiUrl: string = 'https://api.openweathermap.org/data/2.5/onecall';
+  private apiUrl: string = 'https://api.openweathermap.org/data/3.0/onecall?';
   constructor(private http: HttpClient) {
   }
 
-  getWeather(latitude: number, longitude: number, units: string):Observable<Object> {
+
+  getWeatherByLatitudeAndLongitude(latitude: number, longitude: number, units: string):Observable<Weather> {
     const params = {
       lat: latitude.toString(),
       lon: longitude.toString(),
-      exclude: 'current,hourly,minutely,alerts',
       units: units,
       appid: this.apiKey,
     };
 
-    return this.http.get(this.apiUrl, { params });
+    return this.http.get<Weather>(this.apiUrl, { params });
+  }
+
+  getWeatherByCityAndCountry(city:string, countryCode:string, units: string):Observable<Weather> {
+    const params = {
+      q: city + "," + countryCode,
+      APPID: this.apiKey,
+    };
+
+    return this.http.get<Weather>(this.apiUrl, { params });
   }
 
 }

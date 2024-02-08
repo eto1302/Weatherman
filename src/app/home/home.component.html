@@ -1,72 +1,7 @@
-<div class="container">
-  <div class="left">
-    <div class="img">
-
-    </div>
-    <div class="today">
-      <h2>Monday</h2>
-      <span>13 February 2003</span>
-      <div>
-        <i class="bx bx-current-location"></i>
-        <span>Varna, Bulgaria</span>
-      </div>
-    </div>
-    <div class="weather">
-      <i class="bx bx-sun"></i>
-      <h1 class="temp">25°C</h1>
-      <h3>Sunny</h3>
-    </div>
-  </div>
-
-
-  <div class="right">
-    <div class="info">
-      <div>
-        <span class="title">PRECIPATION</span>
-        <span class="value">4%</span>
-      </div>
-      <div>
-        <span class="title">HUMIDITY</span>
-        <span class="value">4%</span>
-      </div>
-      <div>
-        <span class="title">WIND</span>
-        <span class="value">4%</span>
-      </div>
-    </div>
-    <ul class="days">
-      <li>
-        <i class="bx bx-cloud-drizzle"></i>
-        <span>TUE</span>
-        <span class="temp">
-          25°C
-        </span>
-      </li>
-      <li>
-        <i class="bx bx-sun"></i>
-        <span>WED</span>
-        <span class="temp">
-          28°C
-        </span>
-      </li>
-      <li>
-        <i class="bx bx-cloud-rain"></i>
-        <span>THU</span>
-        <span class="temp">
-          12°C
-        </span>
-      </li>
-      <li>
-        <i class="bx bx-cloud"></i>
-        <span>FRI</span>
-        <span class="temp">
-          8°C
-        </span>
-      </li>
-    </ul>
-
-    <div class="btn-container">
-      <button class="loc-button">Add Location</button>
-    </div>
-  </div>
+<ng-container *ngFor="let location of locations">
+  <app-banner [location]="location"></app-banner>
+</ng-container>
+<div class="btn-container">
+  <button class="loc-button" (click)="addLocation()">Add Location</button>
+  <button class="loc-button red" (click)="removeLocations()">Remove Locations</button>
 </div>
