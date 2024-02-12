@@ -2,22 +2,28 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Location} from "../../models/location.model";
 import {LocationService} from "../../services/location.service";
 import {WeatherService} from "../../services/weather.service";
+import {Weather} from "../../models/weather.model";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-banner',
   standalone: true,
-  imports: [],
+  imports: [
+    CommonModule
+  ],
   templateUrl: './banner.component.html',
   styleUrl: './banner.component.css'
 })
 export class BannerComponent implements OnInit {
   @Input() location!: Location;
+  weather!: Weather;
+  loadedWeather: boolean = false
 
   constructor(private locationService: LocationService, private weatherService: WeatherService) {
   }
 
   ngOnInit(): void {
-    //this.getWeather();
+    this.getWeather();
   }
 
   getWeather(): void {
@@ -29,7 +35,9 @@ export class BannerComponent implements OnInit {
           console.log(coordinates[0].lon)
           this.weatherService.getWeatherByLatitudeAndLongitude(coordinates[0].lat, coordinates[0].lon, "metric").subscribe(
             (weatherData) => {
-              console.log(weatherData);
+              console.log(weatherData)
+              this.weather = weatherData
+              this.loadedWeather = true
             },
             (error) => {
               console.error("Error getting weather: ", error);
@@ -43,6 +51,53 @@ export class BannerComponent implements OnInit {
     } else {
       console.error("Location is undefined");
     }
+  }
+
+  getDayOfWeekAbbreviation(dt: number): string {
+    const daysOfWeekAbbreviations = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+    const milliseconds = dt * 1000;
+
+    const dayOfWeek = new Date(milliseconds).getDay();
+
+    return daysOfWeekAbbreviations[dayOfWeek];
+  }
+
+  getBackground() : string {
+    let img: string;
+    switch (this.weather.current.weather[0].id) {
+      case 500:
+      case 501:
+      case 502:
+      case 503:
+      case 504:
+        img = "\"/assets/weather-images/rainy.jpg\"";
+        break;
+      case 801:
+      case 802:
+      case 803:
+      case 804:
+        img = "\"/assets/weather-images/cloudy.jpg\"";
+        break;
+      case 600:
+      case 601:
+      case 602:
+      case 611:
+      case 612:
+      case 613:
+      case 615:
+      case 616:
+      case 620:
+      case 621:
+      case 622:
+        img = "\"/assets/weather-images/snowy.jpg\"";
+        break;
+      default:
+        img = "\"/assets/weather-images/sunny.jpg\"";
+        break;
+    }
+    console.log(img)
+    return `url(${img})`
   }
 }
 

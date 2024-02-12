@@ -7,6 +7,7 @@
   color: white;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  margin: 5%;
 }
 
 .left {
@@ -16,12 +17,11 @@
   display: flex;
   justify-content: center;
   float: left;
-  background: url("/assets/weather-images/sunny.jpg");
   background-position: center;
   background-size: cover;
   transform: scale(1.03) perspective(200px);
   transition: all 0.3s ease-in;
-  border-radius: 30px;
+  border-radius: 20px;
 }
 
 .left:hover {
@@ -64,7 +64,7 @@
 }
 
 .right .info {
-  padding: 10% 20%;
+  padding: 0 20%;
   display: flex;
   flex-direction: column;
 }
