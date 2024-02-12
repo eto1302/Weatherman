@@ -16,6 +16,8 @@ describe('LocationService', () => {
 
     service = TestBed.inject(LocationService);
     httpTestingController = TestBed.inject(HttpTestingController);
+    localStorage.removeItem('userLocations');
+
   });
 
   afterEach(() => {

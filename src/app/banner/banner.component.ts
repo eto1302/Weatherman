@@ -3,7 +3,7 @@ import {Location} from "../../models/location.model";
 import {LocationService} from "../../services/location.service";
 import {WeatherService} from "../../services/weather.service";
 import {Weather} from "../../models/weather.model";
-import {CommonModule} from "@angular/common";
+import {CommonModule, DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-banner',
@@ -31,9 +31,9 @@ export class BannerComponent implements OnInit {
       this.locationService.getCoordinates(this.location.cityName).subscribe(
         (coordinates) => {
           this.location.countryCode = coordinates[0].country;
+          this.location.cityName = coordinates[0].name;
           this.weatherService.getWeatherByLatitudeAndLongitude(coordinates[0].lat, coordinates[0].lon, "metric").subscribe(
             (weatherData) => {
-              console.log(weatherData)
               this.weather = weatherData
               this.loadedWeather = true
             },
@@ -54,11 +54,15 @@ export class BannerComponent implements OnInit {
   getDayOfWeekAbbreviation(dt: number): string {
     const daysOfWeekAbbreviations = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-    const milliseconds = dt * 1000;
 
-    const dayOfWeek = new Date(milliseconds).getDay();
+    const dayOfWeek = new Date(dt * 1000).getDay();
 
     return daysOfWeekAbbreviations[dayOfWeek];
+  }
+
+  getDate(dt: number): string {
+    const formattedDate = new DatePipe('en-US').transform(new Date(dt * 1000), 'dd.MM.yyyy');
+    return formattedDate || '';
   }
 
   getBackground() : string {
@@ -94,7 +98,6 @@ export class BannerComponent implements OnInit {
         img = "\"/assets/weather-images/sunny.jpg\"";
         break;
     }
-    console.log(img)
     return `url(${img})`
   }
 }

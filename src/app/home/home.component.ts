@@ -21,7 +21,6 @@ export class HomeComponent {
 
   constructor(private locationService: LocationService) {
     this.locations = this.locationService.getLocations();
-    console.log(this.locations)
   }
 
   addLocation() {

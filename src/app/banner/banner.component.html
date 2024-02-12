@@ -1,15 +1,15 @@
 <div class="banner" *ngIf="loadedWeather">
   <div class="left" [style.background]="getBackground()">
     <div class="today">
-      <h2>Monday</h2>
-      <span>13 February 2003</span>
+      <h2>{{getDayOfWeekAbbreviation(weather.current.dt)}}</h2>
+      <span>{{getDate(weather.current.dt)}}</span>
       <div>
         <i class="bx bx-current-location"></i>
         <span>{{ location.cityName }}, {{ location.countryCode }}</span>
       </div>
     </div>
     <div class="weather">
-      <i class="bx bx-sun"></i>
+      <span><img src="https://openweathermap.org/img/wn/{{weather.current.weather[0].icon}}@2x.png"></span>
       <h1 class="temp">{{ weather.current.temp }} °C</h1>
       <h3>Sunny</h3>
     </div>
