@@ -26,13 +26,18 @@ export class HomeComponent {
   }
 
   addLocation() {
-    const sof: Location = {
-      cityName: 'Sofia',
-      countryCode: 'bg',
-      latitude: 42.720037643584085,
-      longitude: 23.285486408484694,
+    let userInput = window.prompt('Enter a city: ');
+    if (userInput === null || userInput.trim() === '') {
+      console.log('User canceled or entered an empty string.');
+      return;
+    }
+    const loc: Location = {
+      cityName: userInput,
+      countryCode: '',
+      latitude:0,
+      longitude:0
     };
-    this.locationService.saveLocation(sof);
+    this.locationService.saveLocation(loc);
     this.reload()
   }
 

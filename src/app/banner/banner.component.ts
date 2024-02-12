@@ -30,9 +30,7 @@ export class BannerComponent implements OnInit {
     if (this.location) {
       this.locationService.getCoordinates(this.location.cityName).subscribe(
         (coordinates) => {
-          console.log(coordinates[0])
-          console.log(coordinates[0].lat)
-          console.log(coordinates[0].lon)
+          this.location.countryCode = coordinates[0].country;
           this.weatherService.getWeatherByLatitudeAndLongitude(coordinates[0].lat, coordinates[0].lon, "metric").subscribe(
             (weatherData) => {
               console.log(weatherData)
