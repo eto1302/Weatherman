@@ -101,22 +101,3 @@ export class BannerComponent implements OnInit {
     return `url(${img})`
   }
 }
-
-// let position = {latitude: 0, longitude: 0};
-//
-// this.locationService.getPosition().then(
-//   (pos) => {
-//     position = pos;
-//
-//     this.weatherService.getWeather(position.latitude, position.longitude, "metric").subscribe(
-//       (weatherData) => {
-//         console.log(weatherData);
-//       },
-//       (error) => {
-//         console.error("Error getting weather: ", error);
-//       }
-//     );
-//   }
-// ).catch((error) => {
-//   console.error("Error getting location: ", error);
-// });
