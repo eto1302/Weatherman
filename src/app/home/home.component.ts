@@ -19,8 +19,7 @@ export class HomeComponent {
 
   locations: Location[] = [];
 
-  constructor(private locationService: LocationService,
-              private weatherService: WeatherService) {
+  constructor(private locationService: LocationService) {
     this.locations = this.locationService.getLocations();
     console.log(this.locations)
   }

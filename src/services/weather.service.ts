@@ -25,14 +25,4 @@ export class WeatherService {
 
     return this.http.get<Weather>(this.apiUrl, { params });
   }
-
-  getWeatherByCityAndCountry(city:string, countryCode:string, units: string):Observable<Weather> {
-    const params = {
-      q: city + "," + countryCode,
-      APPID: this.apiKey,
-    };
-
-    return this.http.get<Weather>(this.apiUrl, { params });
-  }
-
 }
